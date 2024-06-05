@@ -1,10 +1,9 @@
 import { router } from "expo-router";
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { Footer } from "../src/components/Footer";
 import { ScreenContainer } from "../src/components/ScreenContainer";
 import { useJoinRoomState } from "../src/store";
-import { verifyRoomRequest } from "../src/api/api";
 
 export default function App() {
   const code = useJoinRoomState((state) => state.code);
@@ -18,16 +17,7 @@ export default function App() {
     if (code.length === 0) {
       return;
     }
-    verifyRoomRequest(code)
-      .then(() => {
-        router.push("set-username");
-      })
-      .catch(() => {
-        Alert.alert(
-          "Sala não encontrada",
-          "Verifique o código e tente novamente"
-        );
-      });
+    router.push("set-username");
   };
 
   return (

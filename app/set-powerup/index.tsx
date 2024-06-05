@@ -2,12 +2,12 @@ import { ScreenContainer } from "../../src/components/ScreenContainer";
 import { Header } from "../../src/components/Header";
 import { Button, Text } from "react-native-paper";
 import { PowerCard, PowerCardProps } from "../../src/components/PowerCard";
-import { ScrollView, StyleSheet } from "react-native";
+import { Alert, ScrollView, StyleSheet } from "react-native";
 import { useJoinRoomState } from "../../src/store";
 import { Powerup } from "../../src/types";
 import { Footer } from "../../src/components/Footer";
-import { joinRoomRequest } from "../../src/api/api";
 import { router } from "expo-router";
+import { socket } from "../../src/api/api";
 
 export default function Page() {
   const powerup = useJoinRoomState((state) => state.powerup);
@@ -34,12 +34,13 @@ export default function Page() {
   ];
 
   const onContinue = () => {
-    joinRoomRequest({
-      powerup,
-      code,
-      username,
+    socket.emit("room:join", { code, username, powerup }, (response) => {
+      if (!response.success) {
+        Alert.alert("Erro", response.message);
+        return;
+      }
+      router.push(`/room/${code}`);
     });
-    router.push(`/room/${code}`);
   };
 
   return (

@@ -7,7 +7,7 @@ import { Footer } from "../../src/components/Footer";
 import { createRoomSchema, CreateRoomSchema } from "../../src/models";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
-import { createRoomRequest } from "../../src/api/api";
+import { socket } from "../../src/api/api";
 
 export default function CreateRoom() {
   const { control, handleSubmit, formState } = useForm<CreateRoomSchema>({
@@ -30,17 +30,19 @@ export default function CreateRoom() {
     name: "options",
   });
 
-  const onSubmit = handleSubmit(async (form) => {
-    try {
-      const { code } = await createRoomRequest({
-        theme: form.theme,
-        options: form.options.map((option) => option.value),
-      });
-      router.push(`/room/${code}`);
-    } catch (error) {
-      console.log(error);
-      Alert.alert("Erro", "Não foi possível criar a sala. Tente novamente.");
-    }
+  const onSubmit = handleSubmit(async ({ theme, options }) => {
+    const payload = {
+      theme,
+      options: options.map((option) => option.value),
+    };
+
+    socket.emit("room:create", payload, (response) => {
+      if (!response.success) {
+        Alert.alert("Erro", response.message);
+        return;
+      }
+      router.push(`/room/${response.code}`);
+    });
   });
 
   const canAddOption = fields.length < 5;

@@ -4,10 +4,8 @@ import { useJoinRoomState } from "../../src/store";
 import { ScreenContainer } from "../../src/components/ScreenContainer";
 import { Footer } from "../../src/components/Footer";
 import { router } from "expo-router";
-import { verifyUsernameRequest } from "../../src/api/api";
 
 export default function Page() {
-  const code = useJoinRoomState((state) => state.code);
   const username = useJoinRoomState((state) => state.username);
   const setUsername = useJoinRoomState((state) => state.setUsername);
 
@@ -15,13 +13,7 @@ export default function Page() {
     if (username.length === 0) {
       return;
     }
-    verifyUsernameRequest(username, code)
-      .then(() => {
-        Alert.alert("Nome já está em uso", "Escolha outro nome");
-      })
-      .catch(() => {
-        router.push("set-powerup");
-      });
+    router.push("set-powerup");
   };
 
   return (
