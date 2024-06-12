@@ -1,7 +1,6 @@
 export enum Powerup {
   DoubleVote = 1,
-  BlockVote = 2,
-  RevealVotes = 3,
+  RevealVotes = 2,
 }
 
 export interface CreateRoomResponse {
@@ -19,12 +18,13 @@ export interface JoinRoomPayload {
   powerup: Powerup;
 }
 
-export interface User {
+export type User = {
   username: string;
   socket: string;
   selectedOption?: number;
   powerup: Powerup;
-}
+  isOwner: boolean;
+};
 
 export interface Option {
   id: number;
@@ -37,12 +37,13 @@ export interface Room {
   theme: string;
   options: Option[];
   users: User[];
-  owner: string;
+  status: "waiting" | "voting" | "stopped";
 }
 
 export interface VotePayload {
   code: string;
   option: number;
+  powerup?: Powerup;
 }
 
 export interface EventResponse {
@@ -61,9 +62,13 @@ export interface ClientToServerEvents {
     response: (response: EventResponse & { code: string }) => void
   ) => void;
   "room:leave": (code: string) => void;
+  "room:start": (code: string) => void;
   vote: (payload: VotePayload) => void;
+  "room:stop": (code: string) => void;
 }
 
 export interface ServerToClientEvents {
   "room:update": (room: Room) => void;
+  "room:start": () => void;
+  "room:stop": () => void;
 }

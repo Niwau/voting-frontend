@@ -23,7 +23,12 @@ export default function App() {
   return (
     <ScreenContainer>
       <View style={styles.main}>
-        <TextInput onChangeText={setCode} mode="outlined" label="Código" />
+        <TextInput
+          onChangeText={setCode}
+          value={code}
+          mode="outlined"
+          label="Código"
+        />
       </View>
       <Footer>
         <Button onPress={createRoom}>Criar Sala</Button>
@@ -39,6 +44,6 @@ const styles = StyleSheet.create({
   main: {
     width: "100%",
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
 });

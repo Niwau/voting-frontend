@@ -1,4 +1,4 @@
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon, Text, TouchableRipple, MD3Colors } from "react-native-paper";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
 
 export interface PowerCardProps {
@@ -18,8 +18,8 @@ export const PowerCard = ({
 }: PowerCardProps) => {
   const dimensions = useWindowDimensions();
 
-  const backgroundColor = isSelected ? "#000" : "#fff";
-  const otherColors = isSelected ? "#fff" : "#000";
+  const backgroundColor = isSelected ? MD3Colors.primary40 : "#fff";
+  const otherColors = isSelected ? "#fff" : MD3Colors.primary40;
 
   return (
     <TouchableRipple

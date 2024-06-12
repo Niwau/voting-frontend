@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "voting-frontend",
+    "slug": "voting-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,6 +26,6 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "my-app"
+    "scheme": "voting-frontend"
   }
 }

@@ -97,6 +97,8 @@ export default function CreateRoom() {
 const styles = StyleSheet.create({
   formContainer: {
     gap: 8,
+    flex: 1,
+    justifyContent: "flex-start",
   },
   optionsHeader: {
     flexDirection: "row",

@@ -10,7 +10,7 @@ export const Footer = ({ children }: FooterProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "flex-end",
+    gap: 8,
   },
 });

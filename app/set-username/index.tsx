@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { useJoinRoomState } from "../../src/store";
 import { ScreenContainer } from "../../src/components/ScreenContainer";
@@ -13,13 +13,18 @@ export default function Page() {
     if (username.length === 0) {
       return;
     }
-    router.push("set-powerup");
+    router.replace("set-powerup");
   };
 
   return (
     <ScreenContainer>
       <View style={styles.main}>
-        <TextInput onChangeText={setUsername} mode="outlined" label="Nome" />
+        <TextInput
+          onChangeText={setUsername}
+          value={username}
+          mode="outlined"
+          label="Nome"
+        />
       </View>
       <Footer>
         <Button mode="contained" onPress={onContinue}>
@@ -34,6 +39,6 @@ const styles = StyleSheet.create({
   main: {
     width: "100%",
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
 });

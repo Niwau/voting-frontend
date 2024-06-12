@@ -10,7 +10,7 @@ import { router } from "expo-router";
 import { socket } from "../../src/api/api";
 
 export default function Page() {
-  const powerup = useJoinRoomState((state) => state.powerup);
+  const powerup = useJoinRoomState((state) => state.powerup) as Powerup;
   const setPowerup = useJoinRoomState((state) => state.setPowerup);
 
   const code = useJoinRoomState((state) => state.code);
@@ -39,7 +39,7 @@ export default function Page() {
         Alert.alert("Erro", response.message);
         return;
       }
-      router.push(`/room/${code}`);
+      router.replace(`/room/${code}`);
     });
   };
 
@@ -64,8 +64,7 @@ export default function Page() {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    paddingBottom: 48,
+    height: "70%",
     gap: 16,
     flexDirection: "row",
   },
