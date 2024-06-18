@@ -1,1 +1,1 @@
-export const API_URL = "http://192.168.10.33:3000";
+export const API_URL = `http://${process.env.EXPO_PUBLIC_MACHINE_ADDRESS}:3000`;
