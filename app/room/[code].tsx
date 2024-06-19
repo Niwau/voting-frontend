@@ -60,7 +60,7 @@ export default function Page() {
   };
 
   const vote = () => {
-    if (selectedOption) {
+    if (typeof selectedOption === "number" && !hasVoted) {
       socket.emit("vote", {
         code: code as string,
         option: selectedOption,
