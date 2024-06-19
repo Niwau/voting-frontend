@@ -2,6 +2,9 @@
 
 O Fechou é uma aplicação que permite usuários realizarem votações de forma gamificada. Esse projeto foi feito para disciplina de 5PDM.
 
+# Importante
+Se você planeja rodar esse projeto no futuro, configure seu firebase pois o banco de dados que está por padrão no backend será deletado por motivos de segurança.
+
 ## Tecnologias
 
 Para o desenvolvimento desse projeto foram utilizadas as seguintes tecnologias:
